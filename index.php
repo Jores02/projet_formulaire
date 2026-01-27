@@ -2,13 +2,12 @@
 // Connexion PDO à MySQL
 try {
     $host = 'mysql';
-    $dbname ='tdR606';
+    $dbname = 'tdR606';
     $user = 'root';
-    $password ='rootpassword';
+    $password = 'rootpassword';
 
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }
@@ -48,19 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Formulaire 10 champs</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>Formulaire avec 10 champs texte</h1>
     <p>
         Liste des developpeur :
-        <ol>
-            <li>Amen AHOUANDOGBO</li>
-            <li>Romain DURAND</li>
-        </ol>
+    <ol>
+        <li>Amen AHOUANDOGBO</li>
+        <li>Romain DURAND</li>
+    </ol>
 
     </p>
 
@@ -72,8 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     type="text"
                     id="field<?= $i ?>"
                     name="field<?= $i ?>"
-                    value="<?= isset($_POST["field$i"]) ? htmlspecialchars($_POST["field$i"]) : '' ?>"
-                >
+                    value="<?= isset($_POST["field$i"]) ? htmlspecialchars($_POST["field$i"]) : '' ?>">
             </div>
         <?php endfor; ?>
 
@@ -86,5 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <img src="monkey-tornado.gif" id="gif">
     <img src="france.jpg" id="france">
+    <img src="gaga.webp" id="gaga">
 </body>
+
 </html>
