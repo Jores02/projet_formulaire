@@ -32,6 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Formulaire avec 10 champs texte</h1>
+    <p>
+        Liste des developpeur :
+        <ol>
+            <li>Amen AHOUANDOGBO</li>
+        </ol>
+
+    </p>
 
     <form method="post">
         <?php for ($i = 1; $i <= 10; $i++): ?>
