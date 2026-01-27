@@ -85,5 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p><strong><?= htmlspecialchars($randomValue) ?></strong></p>
     <?php endif; ?>
     <img src="monkey-tornado.gif" id="gif">
+    <img src="france.jpg" id="france">
 </body>
 </html>
