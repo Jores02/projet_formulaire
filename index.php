@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Formulaire 10 champs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Formulaire avec 10 champs texte</h1>
@@ -83,5 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Valeur choisie au hasard :</h2>
         <p><strong><?= htmlspecialchars($randomValue) ?></strong></p>
     <?php endif; ?>
+    <img src="monkey-tornado.gif" id="gif">
 </body>
 </html>
