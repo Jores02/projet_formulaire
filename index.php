@@ -1,4 +1,18 @@
 <?php
+// Connexion PDO à MySQL
+try {
+    $host = 'mysql';
+    $dbname ='tdR606';
+    $user = 'root';
+    $password ='rootpassword';
+
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+
 // Si le formulaire est soumis
 $randomValue = null;
 
@@ -19,6 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // On choisit une clé au hasard
         $randomKey = array_rand($nonEmpty);
         $randomValue = $nonEmpty[$randomKey];
+
+        // Enregistrer le tirage dans la base de données
+        try {
+            $stmt = $pdo->prepare("INSERT INTO tirages (valeur_tiree, date_tirage) VALUES (?, NOW())");
+            $stmt->execute([$randomValue]);
+        } catch (PDOException $e) {
+            echo "Erreur d'enregistrement : " . $e->getMessage();
+        }
     } else {
         $randomValue = "Tous les champs sont vides.";
     }
@@ -36,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         Liste des developpeur :
         <ol>
             <li>Amen AHOUANDOGBO</li>
+            <li>Romain DURAND</li>
         </ol>
 
     </p>
