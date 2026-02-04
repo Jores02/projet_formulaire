@@ -4,6 +4,9 @@
 
 add depedenci : composer install
 
+## Migration
+php migrate.php
+
 ## docker :
 
 start database : docker compose up -d

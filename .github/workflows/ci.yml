@@ -1,4 +1,4 @@
-name: Tests
+name: CI / CD
 
 on:
   push:
@@ -55,3 +55,14 @@ jobs:
           MYSQL_USER: root
           MYSQL_PASSWORD: rootpassword
           MYSQL_DATABASE: tdR606
+
+
+      - name: Deploy to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PWD }}
+          protocol: ftp
+          local-dir: ./
+          server-dir: /
