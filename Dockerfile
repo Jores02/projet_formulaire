@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.3-apache
 # Installer l'extension PDO MySQL
 RUN docker-php-ext-install pdo pdo_mysql
 # Active mod_rewrite (pas obligatoire ici, mais utile en général)

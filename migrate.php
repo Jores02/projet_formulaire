@@ -6,10 +6,10 @@ function migrate()
 {
     $migrationFiles = glob(__DIR__ . '/migrations/*.php');
     
-    $host = 'mysql';
-    $dbname = 'tdR606';
-    $user = 'root';
-    $password = 'rootpassword';
+    $host = getenv('MYSQL_HOST') ?: 'mysql';
+    $dbname = getenv('MYSQL_DATABASE') ?: 'tdR606';
+    $user = getenv('MYSQL_USER') ?: 'root';
+    $password = getenv('MYSQL_PASSWORD') ?: 'rootpassword';
 
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
