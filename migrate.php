@@ -5,8 +5,8 @@ require_once __DIR__ . '/db/Migration.php';
 function migrate()
 {
     $migrationFiles = glob(__DIR__ . '/migrations/*.php');
-    
-    $host = getenv('MYSQL_HOST') ?: 'mysql';
+
+    $host = getenv('MYSQL_HOST') ?: '127.0.0.1';
     $dbname = getenv('MYSQL_DATABASE') ?: 'tdR606';
     $user = getenv('MYSQL_USER') ?: 'root';
     $password = getenv('MYSQL_PASSWORD') ?: 'rootpassword';
