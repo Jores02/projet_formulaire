@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: tdR606
+        ports:
+          - 3306:3306
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo, pdo_mysql, curl
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Start server
+        run: php -S 127.0.0.1:8080 &
+
+      - name: Wait for server
+        run: sleep 3
+
+      - name: Run migrations
+        run: php migrate.php
+
+      - name: Run tests
+        run: vendor/bin/phpunit tests/
