@@ -61,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <ol>
         <li>Amen AHOUANDOGBO</li>
         <li>Romain DURAND</li>
+        <li>Y manque pas qqun ?</li>
+        <li>Tom HUBERT - Test (à moitié)</li>
     </ol>
 
     </p>
@@ -85,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p><strong><?= htmlspecialchars($randomValue) ?></strong></p>
     <?php endif; ?>
     <img src="monkey-tornado.gif" id="gif">
-    <img src="france.jpg" id="france">
+    <!-- <img src="france.jpg" id="france"> -->
     <img src="gaga.webp" id="gaga">
 </body>
 
