@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <li>Y manque pas qqun ?</li>
         <li>Tom HUBERT - Test (à moitié)</li>
         <li>ethanhugerot</li>
+        <li>Mathieu DUCROT (celui qui gère)</li>
     </ol>
 
     </p>
@@ -87,22 +88,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Valeur choisie au hasard :</h2>
         <p><strong><?= htmlspecialchars($randomValue) ?></strong></p>
     <?php endif; ?>
-    
+
     <div id="polo-overlay" class="hidden">
         <img src="car-dreak.gif" id="polo-gif" alt="Polo Cabrec">
     </div>
-    
+
     <audio id="polo-audio" src="salut-tout-le-monde-c'est-polo.mp3" preload="auto"></audio>
-    
+
     <img src="monkey-tornado.gif" id="gif">
     <img src="gaga.webp" id="gaga">
-    
+
     <script>
         const overlay = document.getElementById('polo-overlay');
         const audio = document.getElementById('polo-audio');
         const poloGif = document.getElementById('polo-gif');
         let audioEnabled = false;
-        
+
         function enableAudio() {
             if (!audioEnabled) {
                 audio.play().then(() => {
@@ -115,34 +116,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 });
             }
         }
-        
+
         document.querySelectorAll('input, button').forEach(element => {
-            element.addEventListener('focus', enableAudio, { once: true });
-            element.addEventListener('click', enableAudio, { once: true });
+            element.addEventListener('focus', enableAudio, {
+                once: true
+            });
+            element.addEventListener('click', enableAudio, {
+                once: true
+            });
         });
-        
+
         function playPoloAnimation() {
             if (!audioEnabled) return;
-            
+
             overlay.style.display = 'flex';
             overlay.classList.remove('hidden');
             overlay.classList.add('show');
-            
+
             setTimeout(() => {
                 poloGif.classList.add('zoom-in');
                 audio.currentTime = 0;
                 audio.play().catch(err => console.log('Audio play error:', err));
             }, 50);
-            
+
             audio.addEventListener('ended', function() {
                 resetAnimation();
-            }, { once: true });
+            }, {
+                once: true
+            });
         }
-        
+
         function resetAnimation() {
             poloGif.style.opacity = '0';
             poloGif.style.transform = 'scale(0.1)';
-            
+
             setTimeout(() => {
                 overlay.style.display = 'none';
                 overlay.classList.remove('show');
@@ -150,9 +157,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 poloGif.classList.remove('zoom-in');
             }, 300);
         }
-        
+
         function scheduleRandomPolo() {
-            const randomDelay = Math.random() * (20000 - 5000) + 5000; 
+            const randomDelay = Math.random() * (20000 - 5000) + 5000;
             setTimeout(() => {
                 playPoloAnimation();
                 const audioDuration = audio.duration || 3;
