@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <li>Tom HUBERT - Test (à moitié)</li>
         <li>ethanhugerot</li>
         <li>Mathieu DUCROT (celui qui gère)</li>
+        <li>Tristan LESPLINGUIES (pour ceux qui viendront après)</li>
     </ol>
 
     </p>
@@ -96,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <audio id="polo-audio" src="salut-tout-le-monde-c'est-polo.mp3" preload="auto"></audio>
 
     <img src="monkey-tornado.gif" id="gif">
+    <img src="france.jpg" id="france">
     <img src="gaga.webp" id="gaga">
 
     <script>
