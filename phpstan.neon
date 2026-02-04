@@ -1,0 +1,8 @@
+parameters:
+	level: 5
+	paths:
+		- db
+		- migrations
+		- tests
+		- index.php
+		- migrate.php
