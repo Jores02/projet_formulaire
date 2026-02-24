@@ -16,6 +16,11 @@ jobs:
           MYSQL_DATABASE: tdR606
         ports:
           - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -prootpassword"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
 
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +34,19 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Start server
+      - name: Wait for MySQL
+        run: |
+          for i in {1..20}; do
+            if mysqladmin ping -h 127.0.0.1 -prootpassword --silent; then
+              echo "MySQL is ready"
+              exit 0
+            fi
+            echo "Waiting for MySQL..."
+            sleep 1
+          done
+          exit 1
+
+      - name: Start PHP server
         run: php -S 127.0.0.1:8080 &
         env:
           MYSQL_HOST: 127.0.0.1
@@ -38,7 +55,17 @@ jobs:
           MYSQL_DATABASE: tdR606
 
       - name: Wait for server
-        run: sleep 3
+        run: |
+          for i in {1..10}; do
+            if curl -s http://127.0.0.1:8080 > /dev/null; then
+              echo "Server is up"
+              exit 0
+            fi
+            echo "Waiting for PHP server..."
+            sleep 1
+          done
+          echo "Server did not start"
+          exit 1
 
       - name: Run migrations
         run: php migrate.php
@@ -56,13 +83,10 @@ jobs:
           MYSQL_PASSWORD: rootpassword
           MYSQL_DATABASE: tdR606
 
-
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@v4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PWD }}
-          protocol: ftp
-          local-dir: ./
-          server-dir: /
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public
